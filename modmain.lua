@@ -17,6 +17,55 @@ local ANNOUNCE_TEXT_EN = {
     ["厨师推荐"] = "Chef's Choice",
 }
 
+local FOOD_NAMES_EN = {
+    ["肉丸"] = "Meatballs",
+    ["骨汤"] = "Bone Bouillon",
+    ["培根煎蛋"] = "Bacon and Eggs",
+    ["蝴蝶松饼"] = "Butter Muffin",
+    ["火龙果派"] = "Dragonpie",
+    ["炸鱼排"] = "Fishsticks",
+    ["鱼肉玉米卷"] = "Fish Tacos",
+    ["青蛙圆三明治"] = "Froggle Bunwich",
+    ["水果杂烩"] = "Fruit Medley",
+    ["蜜汁火腿"] = "Honey Ham",
+    ["蜜汁卤肉"] = "Honey Nuggets",
+    ["串烧"] = "Kabobs",
+    ["曼德拉草汤"] = "Mandrake Soup",
+    ["土豆泥"] = "Mashed Potatoes",
+    ["怪物千层饼"] = "Monster Lasagna",
+    ["饺子"] = "Pierogi",
+    ["粉饼"] = "Powcake",
+    ["南瓜饼干"] = "Pumpkin Cookies",
+    ["蔬菜杂烩"] = "Ratatouille",
+    ["酿茄子"] = "Stuffed Eggplant",
+    ["太妃糖"] = "Taffy",
+    ["火鸡正餐"] = "Turkey Dinner",
+    ["鳗鱼料理"] = "Unagi",
+    ["华夫饼"] = "Waffles",
+    ["湿糊糊的食物"] = "Wet Goop",
+    ["怪物肉"] = "Monster Meat",
+    ["大肉"] = "Meat",
+    ["小肉"] = "Morsel",
+    ["鱼肉"] = "Fish",
+    ["鳗鱼"] = "Eel",
+    ["浆果"] = "Berries",
+    ["烤浆果"] = "Roasted Berries",
+    ["胡萝卜"] = "Carrot",
+    ["烤胡萝卜"] = "Roasted Carrot",
+    ["玉米"] = "Corn",
+    ["爆米花"] = "Popcorn",
+    ["茄子"] = "Eggplant",
+    ["烤茄子"] = "Braised Eggplant",
+    ["南瓜"] = "Pumpkin",
+    ["烤南瓜"] = "Hot Pumpkin",
+    ["火龙果"] = "Dragon Fruit",
+    ["烤火龙果"] = "Prepared Dragon Fruit",
+    ["榴莲"] = "Durian",
+    ["超级榴莲"] = "Extra Smelly Durian",
+    ["石果"] = "Stone Fruit",
+    ["熟石果"] = "Cooked Stone Fruit",
+}
+
 local function GetAllFoodRecipes()
     local foods = {}
     for k, v in pairs(AllRecipes) do
@@ -72,6 +121,13 @@ local function AnnounceRecipes()
     local recipe_names = {}
     for _, food in ipairs(daily_recipes) do
         local name = STRINGS.NAMES[string.upper(food)] or food
+        if LANGUAGE == "english" then
+            if FOOD_NAMES_EN[name] then
+                name = FOOD_NAMES_EN[name]
+            else
+                name = food
+            end
+        end
         table.insert(recipe_names, name)
     end
     
