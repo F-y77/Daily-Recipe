@@ -2,12 +2,20 @@ GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL,
 
 local RECIPE_COUNT = GetModConfigData("recipe_count") or 3
 local BONUS_MULTIPLIER = GetModConfigData("bonus_multiplier") or 1.5
+local LANGUAGE = GetModConfigData("language") or "chinese"
 local ANNOUNCE_TEXT = GetModConfigData("announce_text") or "今日推荐"
 local EXTRA_BUFF = GetModConfigData("extra_buff") or "none"
 local BUFF_DURATION = GetModConfigData("buff_duration") or 60
 
 local daily_recipes = {}
 local last_day = -1
+
+local ANNOUNCE_TEXT_EN = {
+    ["今日推荐"] = "Today's Special",
+    ["每日特餐"] = "Daily Menu",
+    ["今日菜单"] = "Today's Menu",
+    ["厨师推荐"] = "Chef's Choice",
+}
 
 local function GetAllFoodRecipes()
     local foods = {}
@@ -67,16 +75,30 @@ local function AnnounceRecipes()
         table.insert(recipe_names, name)
     end
     
-    TheNet:Announce("============== 今日食谱 ==============")
-    TheWorld:DoTaskInTime(1, function()
-        TheNet:Announce("【" .. ANNOUNCE_TEXT .. "】" .. table.concat(recipe_names, "、"))
-    end)
-    TheWorld:DoTaskInTime(2, function()
-        TheNet:Announce("食用可获得额外加成！")
-    end)
-    TheWorld:DoTaskInTime(3, function()
-        TheNet:Announce("======================================")
-    end)
+    if LANGUAGE == "english" then
+        TheNet:Announce("============== Daily Recipe ==============")
+        TheWorld:DoTaskInTime(1, function()
+            local announce_text_en = ANNOUNCE_TEXT_EN[ANNOUNCE_TEXT] or "Today's Special"
+            TheNet:Announce("[" .. announce_text_en .. "] " .. table.concat(recipe_names, ", "))
+        end)
+        TheWorld:DoTaskInTime(2, function()
+            TheNet:Announce("Consume for extra bonuses!")
+        end)
+        TheWorld:DoTaskInTime(3, function()
+            TheNet:Announce("==========================================")
+        end)
+    else
+        TheNet:Announce("============== 今日食谱 ==============")
+        TheWorld:DoTaskInTime(1, function()
+            TheNet:Announce("【" .. ANNOUNCE_TEXT .. "】" .. table.concat(recipe_names, "、"))
+        end)
+        TheWorld:DoTaskInTime(2, function()
+            TheNet:Announce("食用可获得额外加成！")
+        end)
+        TheWorld:DoTaskInTime(3, function()
+            TheNet:Announce("======================================")
+        end)
+    end
 end
 
 local function CheckDailyNews()
@@ -186,7 +208,11 @@ AddComponentPostInit("eater", function(self)
                 ApplyExtraBuff(self.inst)
                 
                 if self.inst.components.talker then
-                    self.inst.components.talker:Say("今日特餐！")
+                    if LANGUAGE == "english" then
+                        self.inst.components.talker:Say("Daily Special!")
+                    else
+                        self.inst.components.talker:Say("今日特餐！")
+                    end
                 end
             end
         end
