@@ -1,0 +1,46 @@
+[h1]Daily Recipe[/h1]
+
+[b]Version: 1.0.0 | Author: Orange Xiaoxing[/b]
+
+[hr][/hr]
+
+[h2]Mod Features[/h2]
+
+Automatically announces daily recommended recipes during daytime. Consuming the recommended foods grants bonus attribute recovery and special buff effects. Supports both vanilla and modded recipes.
+
+[hr][/hr]
+
+[h2]Effects & Configuration[/h2]
+
+[b]Attribute Bonus[/b]
+When consuming daily recipes, health, hunger, and sanity restoration effects receive additional bonuses.
+Available multipliers: 1.2x / 1.5x / 2.0x / 2.5x / 3.0x
+
+[b]Extra Buffs[/b]
+[list]
+[*] Speed: Movement speed increased by 30%
+[*] Light: Character emits light around them
+[*] Lifesteal: Attacks restore 20% of damage dealt as health
+[/list]
+Duration: 30s / 60s / 120s / 180s / 300s
+
+[b]Configuration Options[/b]
+[list]
+[*] Daily recipe count: 1-5 recipes (default 3)
+[*] Bonus multiplier: 1.2-3.0x (default 1.5x)
+[*] Announcement text: Today's Special / Daily Menu / Chef's Choice / Recommended
+[*] Extra buff: None / Speed / Light / Lifesteal
+[*] Buff duration: 30-300 seconds
+[/list]
+
+[hr][/hr]
+
+[h2]Thank You[/h2]
+
+Thank you for using this mod. Enjoy your game!
+
+For issues or suggestions, please leave a comment or join QQ Group: 1042944194
+
+[hr][/hr]
+
+[b]Compatibility:[/b] Supports Don't Starve Together. All clients must have the mod installed.
